@@ -34,6 +34,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
                 return Card(
                   child: ListTile(
+                    leading: IconButton(
+                      icon: const Icon(Icons.edit),
+                      onPressed: () async {
+                        addNewBook(context, index);
+                      },
+                    ),
                     title: Text(result!.tasktitle!),
                     subtitle: Text(result.taskdetails!),
                     trailing: InkWell(
@@ -57,12 +63,12 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
-        onPressed: () => addNewBook(context),
+        onPressed: () => addNewBook(context, DateTime.now().toString()),
       ),
     );
   }
 
-  addNewBook(BuildContext context) {
+  addNewBook(BuildContext context, index) {
     showDialog(
         context: context,
         builder: (context) {
@@ -88,7 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ElevatedButton(
                     onPressed: () async {
                       await box!.put(
-                          DateTime.now().toString(),
+                          index,
                           QuickTask(
                             tasktitle: _title.text,
                             taskdetails: _author.text,
