@@ -1,4 +1,5 @@
 import 'package:hive/hive.dart';
+part 'QuickTask.g.dart';
 
 @HiveType(typeId: 1)
 class QuickTask {
