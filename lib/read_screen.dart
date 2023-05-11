@@ -113,16 +113,28 @@ class _ReadScreenState extends State<ReadScreen> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 TextFormField(
+                  textAlign: TextAlign.center,
                   controller: taskController,
-                  decoration: const InputDecoration(hintText: 'Task Title'),
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                    ),
+                    hintText: 'Enter  your Task Title',
+                  ),
                 ),
                 const SizedBox(
                   height: 15,
                 ),
                 TextFormField(
+                  textAlign: TextAlign.center,
                   maxLines: 4,
                   controller: taskDetailsController,
-                  decoration: const InputDecoration(hintText: 'Task Details'),
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                    ),
+                    hintText: 'Enter  your Task Details',
+                  ),
                 ),
                 const SizedBox(
                   height: 15,
