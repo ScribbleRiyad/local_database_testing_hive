@@ -4,14 +4,14 @@ import 'package:local_database_testing_hive/QuickTask.dart';
 
 import 'package:local_database_testing_hive/update_screen.dart';
 
-class ReadScreen extends StatefulWidget {
-  const ReadScreen({super.key});
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
 
   @override
-  State<ReadScreen> createState() => _ReadScreenState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _ReadScreenState extends State<ReadScreen> {
+class _HomeScreenState extends State<HomeScreen> {
   late final Box dataBox;
   final TextEditingController taskController = TextEditingController();
   final TextEditingController taskDetailsController = TextEditingController();
@@ -145,7 +145,7 @@ class _ReadScreenState extends State<ReadScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const ReadScreen(),
+                          builder: (context) => const HomeScreen(),
                         ),
                       );
                     },
