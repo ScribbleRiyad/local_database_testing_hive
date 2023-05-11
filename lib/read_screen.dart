@@ -108,7 +108,7 @@ class _ReadScreenState extends State<ReadScreen> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Center(child: const Text("New Task")),
+            title: const Center(child: Text("New Task")),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
