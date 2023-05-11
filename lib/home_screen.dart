@@ -15,6 +15,7 @@ class _HomeScreenState extends State<HomeScreen> {
   late final Box dataBox;
   final TextEditingController taskController = TextEditingController();
   final TextEditingController taskDetailsController = TextEditingController();
+
   @override
   void initState() {
     super.initState();

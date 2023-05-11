@@ -63,9 +63,10 @@ class _UpdateScreenState extends State<UpdateScreen> {
             child: TextField(
               controller: titleController,
               decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: 'Enter Title',
-                labelText: 'Title',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                ),
+                hintText: 'Enter Updated Task title',
               ),
             ),
           ),
@@ -75,9 +76,10 @@ class _UpdateScreenState extends State<UpdateScreen> {
               controller: descriptionController,
               maxLines: 3,
               decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: 'Enter Description',
-                labelText: 'Description',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                ),
+                hintText: 'Enter  Updated Task Details',
               ),
             ),
           ),
@@ -91,7 +93,7 @@ class _UpdateScreenState extends State<UpdateScreen> {
                 ),
               );
             },
-            child: const Text('UPDATE DATA'),
+            child: const Text('Update Task'),
           ),
         ],
       ),
