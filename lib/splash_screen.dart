@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:local_database_testing_hive/home_screen.dart';
+import 'package:local_database_testing_hive/read_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -18,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(
         const Duration(seconds: 8),
         () => Navigator.push(
-            context, CupertinoPageRoute(builder: (_) => const HomeScreen())));
+            context, CupertinoPageRoute(builder: (_) => const ReadScreen())));
     super.initState();
   }
 

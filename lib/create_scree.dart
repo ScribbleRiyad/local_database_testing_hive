@@ -12,19 +12,19 @@ class CreateScreen extends StatefulWidget {
 
 class _CreateScreenState extends State<CreateScreen> {
   late final Box dataBox;
-  final TextEditingController _titleController = TextEditingController();
-  final TextEditingController _descriptionController = TextEditingController();
+  final TextEditingController taskController = TextEditingController();
+  final TextEditingController taskDetailsController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    dataBox = Hive.box('data_box');
+    dataBox = Hive.box('QuickTaskBox');
   }
 
   _createData() {
     QuickTask newData = QuickTask(
-      tasktitle: _titleController.text,
-      taskdetails: _descriptionController.text,
+      tasktitle: taskController.text,
+      taskdetails: taskDetailsController.text,
     );
 
     dataBox.add(newData);
@@ -38,7 +38,7 @@ class _CreateScreenState extends State<CreateScreen> {
           icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.pop(context),
         ),
-        title: const Text('Create Screen'),
+        title: const Text('Add New Your Task Here '),
         centerTitle: true,
       ),
       body: Column(
@@ -46,7 +46,7 @@ class _CreateScreenState extends State<CreateScreen> {
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: TextField(
-              controller: _titleController,
+              controller: taskController,
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 hintText: 'Enter Title',
@@ -57,7 +57,7 @@ class _CreateScreenState extends State<CreateScreen> {
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: TextField(
-              controller: _descriptionController,
+              controller: taskDetailsController,
               maxLines: 3,
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),

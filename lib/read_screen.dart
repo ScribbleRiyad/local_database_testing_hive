@@ -16,7 +16,7 @@ class _ReadScreenState extends State<ReadScreen> {
   @override
   void initState() {
     super.initState();
-    dataBox = Hive.box('data_box');
+    dataBox = Hive.box('QuickTaskBox');
   }
 
   _deleteData(int index) {
@@ -27,26 +27,15 @@ class _ReadScreenState extends State<ReadScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Read Screen'),
+        title: const Text('Quick Task App'),
         centerTitle: true,
-        actions: [
-          IconButton(
-            onPressed: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const CreateScreen(),
-              ),
-            ),
-            icon: const Icon(Icons.add),
-          ),
-        ],
       ),
       body: ValueListenableBuilder(
         valueListenable: dataBox.listenable(),
         builder: (context, value, child) {
           if (value.isEmpty) {
             return const Center(
-              child: Text('Database Is Empty'),
+              child: Text('You have no task'),
             );
           } else {
             return ListView.builder(
@@ -55,36 +44,53 @@ class _ReadScreenState extends State<ReadScreen> {
                 var box = value;
                 var getData = box.getAt(index);
 
-                return ListTile(
-                  leading: IconButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => UpdateScreen(
-                            index: index,
-                            data: getData,
-                            titleController: getData.title,
-                            descriptionController: getData.description,
-                          ),
-                        ),
-                      );
-                    },
-                    icon: const Icon(Icons.edit),
-                  ),
-                  title: Text(getData.title),
-                  subtitle: Text(getData.description),
-                  trailing: IconButton(
-                    onPressed: () {
-                      _deleteData(index);
-                    },
-                    icon: const Icon(Icons.delete),
+                return Padding(
+                  padding: const EdgeInsets.only(
+                      left: 8.00, right: 8.00, top: 5.00, bottom: 5.00),
+                  child: Card(
+                    color: Colors.yellowAccent,
+                    elevation: 5,
+                    child: ListTile(
+                      leading: IconButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => UpdateScreen(
+                                index: index,
+                                data: getData,
+                                titleController: getData.tasktitle,
+                                descriptionController: getData.taskdetails,
+                              ),
+                            ),
+                          );
+                        },
+                        icon: const Icon(Icons.edit),
+                      ),
+                      title: Text(getData.tasktitle),
+                      subtitle: Text(getData.taskdetails),
+                      trailing: IconButton(
+                        onPressed: () {
+                          _deleteData(index);
+                        },
+                        icon: const Icon(Icons.delete),
+                      ),
+                    ),
                   ),
                 );
               },
             );
           }
         },
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.add),
+        onPressed: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const CreateScreen(),
+          ),
+        ),
       ),
     );
   }

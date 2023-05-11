@@ -3,8 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:local_database_testing_hive/QuickTask.dart';
-
-import 'read_screen.dart';
+import 'package:local_database_testing_hive/read_screen.dart';
 
 class UpdateScreen extends StatefulWidget {
   final int index;
@@ -40,7 +39,7 @@ class _UpdateScreenState extends State<UpdateScreen> {
   void initState() {
     super.initState();
 
-    dataBox = Hive.box('data_box');
+    dataBox = Hive.box('QuickTaskBox');
     titleController = TextEditingController(text: widget.titleController);
     descriptionController =
         TextEditingController(text: widget.descriptionController);

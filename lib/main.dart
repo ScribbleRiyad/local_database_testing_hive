@@ -10,8 +10,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   Hive.registerAdapter(QuickTaskAdapter());
-
-  box = await Hive.openBox<QuickTask>("QuickTaskBox");
+  await Hive.openBox('QuickTaskBox');
 
   runApp(const QuickTaskApp());
 }
@@ -25,7 +24,7 @@ class QuickTaskApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Quick Task App',
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          primarySwatch: Colors.deepOrange,
         ),
         home: const SplashScreen());
   }
