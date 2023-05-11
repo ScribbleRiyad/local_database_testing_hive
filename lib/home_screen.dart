@@ -14,6 +14,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final _title = TextEditingController();
   final _author = TextEditingController();
+  final title = TextEditingController();
+  final author = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     leading: IconButton(
                       icon: const Icon(Icons.edit),
                       onPressed: () async {
-                        addNewBook(context, index);
+                        updateTask(context, index);
                       },
                     ),
                     title: Text(result!.tasktitle!),
@@ -63,12 +65,12 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
-        onPressed: () => addNewBook(context, DateTime.now().toString()),
+        onPressed: () => addNewTask(context, DateTime.now().toString()),
       ),
     );
   }
 
-  addNewBook(BuildContext context, index) {
+  addNewTask(BuildContext context, index) {
     showDialog(
         context: context,
         builder: (context) {
@@ -98,6 +100,48 @@ class _HomeScreenState extends State<HomeScreen> {
                           QuickTask(
                             tasktitle: _title.text,
                             taskdetails: _author.text,
+                          ));
+
+                      // ignore: use_build_context_synchronously
+                      Navigator.pop(context);
+                    },
+                    child: const Text("Add")),
+              ],
+            ),
+          );
+        });
+  }
+
+  updateTask(BuildContext context, index) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text("New Task"),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TextFormField(
+                  controller: _title,
+                  decoration: const InputDecoration(hintText: 'Task Title'),
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+                TextFormField(
+                  controller: _author,
+                  decoration: const InputDecoration(hintText: 'Task Details'),
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+                ElevatedButton(
+                    onPressed: () async {
+                      await box!.putAt(
+                          index,
+                          QuickTask(
+                            tasktitle: index.title.text,
+                            taskdetails: index.author.text,
                           ));
 
                       // ignore: use_build_context_synchronously
