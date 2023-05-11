@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:local_database_testing_hive/QuickTask.dart';
 import 'package:local_database_testing_hive/create_scree.dart';
 import 'package:local_database_testing_hive/update_screen.dart';
 
@@ -12,15 +13,25 @@ class ReadScreen extends StatefulWidget {
 
 class _ReadScreenState extends State<ReadScreen> {
   late final Box dataBox;
-
+  final TextEditingController taskController = TextEditingController();
+  final TextEditingController taskDetailsController = TextEditingController();
   @override
   void initState() {
     super.initState();
     dataBox = Hive.box('QuickTaskBox');
   }
 
-  _deleteData(int index) {
+  deleteData(int index) {
     dataBox.deleteAt(index);
+  }
+
+  createData() {
+    QuickTask newData = QuickTask(
+      tasktitle: taskController.text,
+      taskdetails: taskDetailsController.text,
+    );
+
+    dataBox.add(newData);
   }
 
   @override
@@ -71,7 +82,7 @@ class _ReadScreenState extends State<ReadScreen> {
                       subtitle: Text(getData.taskdetails),
                       trailing: IconButton(
                         onPressed: () {
-                          _deleteData(index);
+                          deleteData(index);
                         },
                         icon: const Icon(Icons.delete),
                       ),
@@ -85,13 +96,51 @@ class _ReadScreenState extends State<ReadScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
-        onPressed: () => Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const CreateScreen(),
-          ),
-        ),
+        onPressed: () => addNewTask(context),
       ),
     );
+  }
+
+  addNewTask(
+    BuildContext context,
+  ) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text("New Task"),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TextFormField(
+                  controller: taskController,
+                  decoration: const InputDecoration(hintText: 'Task Title'),
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+                TextFormField(
+                  maxLines: 4,
+                  controller: taskDetailsController,
+                  decoration: const InputDecoration(hintText: 'Task Details'),
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+                ElevatedButton(
+                    onPressed: () {
+                      createData();
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const ReadScreen(),
+                        ),
+                      );
+                    },
+                    child: const Text("Add Task")),
+              ],
+            ),
+          );
+        });
   }
 }

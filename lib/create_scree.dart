@@ -48,9 +48,7 @@ class _CreateScreenState extends State<CreateScreen> {
             child: TextField(
               controller: taskController,
               decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: 'Enter Title',
-                labelText: 'Title',
+                hintText: 'Enter Your Task Title',
               ),
             ),
           ),
@@ -61,8 +59,7 @@ class _CreateScreenState extends State<CreateScreen> {
               maxLines: 3,
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
-                hintText: 'Enter Description',
-                labelText: 'Description',
+                hintText: 'Enter  your Task Details',
               ),
             ),
           ),
