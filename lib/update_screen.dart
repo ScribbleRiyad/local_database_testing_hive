@@ -87,7 +87,7 @@ class _UpdateScreenState extends State<UpdateScreen> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const ReadScreen(),
+                  builder: (context) => const HomeScreen(),
                 ),
               );
             },
